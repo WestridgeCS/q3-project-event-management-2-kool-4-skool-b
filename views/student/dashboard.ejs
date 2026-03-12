@@ -6,11 +6,11 @@ Click a college to add notes and mark your interest.
 </p>
 
 <div class="college-grid">
-  <% colleges.forEach(college => { %>
-  <a href="/student/college/<%= college._id %>">
+  <% artworks.forEach(artwork => { %>
+  <a href="/student/college/<%= artwork._id %>">
     <div class="college-card">
-      <% if (college.iconPath) { %>
-      <img src="<%= college.iconPath %>" class="college-logo">
+      <% if (artwork.iconPath) { %>
+      <img src="<%= artwork.iconPath %>" class="college-logo">
       <% } else { %>
 
       <div class="placeholder-logo">
@@ -18,7 +18,7 @@ Click a college to add notes and mark your interest.
       </div>
       <% } %>
 
-      <h3><%= college.name %></h3>
+      <h3><%= artwork.name %></h3>
     </div>
   </a>
   <% }) %>
