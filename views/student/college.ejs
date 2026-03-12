@@ -1,12 +1,12 @@
 <%- include('../partials/header') %>
 
 <div class="college-detail">
-  <h1><%= college.name %></h1>
+  <h1><%= artwork.name %></h1>
   <div class="rep-card">
     <h3>Representative</h3>
-    <p><strong>Name:</strong> <%= college.repName || "Unknown" %></p>
-    <p><strong>Email:</strong> <%= college.repEmail || "N/A" %></p>
-    <p><strong>Website:</strong> <%= college.website || "N/A" %></p>
+    <p><strong>Name:</strong> <%= artwork.repName || "Unknown" %></p>
+    <p><strong>Email:</strong> <%= artwork.repEmail || "N/A" %></p>
+    <p><strong>Website:</strong> <%= artwork.website || "N/A" %></p>
   </div>
 
   <form method="POST" class="notes-form">
@@ -18,7 +18,7 @@
       type="checkbox"
       name="interested"
       <%= visit && visit.interested ? "checked" : "" %>
-      > Interested in this college
+      > Interested in this artwork
     </label>
 
     <button class="btn">Save Notes</button>
