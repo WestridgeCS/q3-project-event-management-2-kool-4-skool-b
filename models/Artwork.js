@@ -1,13 +1,14 @@
 import mongoose from "mongoose"
 
-const collegeSchema = new mongoose.Schema({
-  name:String,
-  repName:String,
-  repEmail:String,
-  repPhone:String,
-  website:String,
-  notes:String,
-  iconPath:String
+const artSchema = new mongoose.Schema({
+  title: String,
+  creator:{
+    type:mongoose.Schema.Types.ObjectId,
+    ref:"Artist",
+  },
+  desc:String,
+  display:Boolean,
+
 })
 
-export default mongoose.model("College",collegeSchema)
+export default mongoose.model("Artwork",artSchema)
