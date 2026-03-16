@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 
-import User from "./models/User.js"
+import User from "./models/Artist.js"
 
 dotenv.config()
 
@@ -18,84 +18,51 @@ console.log("Old artists removed")
 const artists = [
 
 {
-  name: "Ava Martinez",
-  studentId: "1001",
-  email: "ava.martinez@westridge.edu",
+  name: "Alex Ramirez",
+
+  email: "alex.r@art.com",
   passwordHash: null,
+  bio:"Born in the US, Aleex Ramirez had been making art from a young age. Early on in his career, Ramirez primarily worked with pencils and watercolors. While he was studying in Italy, Ramirez discovered oil paints. Since then, he hasn't looked back. Ramirez's work is known for bright colors and abstract shapes, blending modern aesthetics with traditional painting techniques.",
+  portfolio:"",
   role: "student"
 },
 
 {
-  name: "Liam Chen",
-  studentId: "1002",
-  email: "liam.chen@westridge.edu",
+  name: "Sarah Nguyen",
+  email: "sarah.n@art.com",
   passwordHash: null,
+  bio:"Known for her beautiful and sofisticated works using childish materials, Sarah Nguyen has received international acclaim for her ",
+  portfolio:"",
   role: "student"
 },
 
 {
-  name: "Sophia Patel",
-  studentId: "1003",
-  email: "sophia.patel@westridge.edu",
+  name: "Jim Tallow",
+  email: "jim.t@art.com",
   passwordHash: null,
+  bio:"",
+  portfolio:"",
   role: "student"
 },
 
 {
-  name: "Noah Thompson",
-  studentId: "1004",
-  email: "noah.thompson@westridge.edu",
+  name: "Rachel Torres",
+  email: "rachel.t@art.com",
   passwordHash: null,
+  bio:"",
+  portfolio:"",
   role: "student"
 },
 
 {
-  name: "Isabella Rodriguez",
-  studentId: "1005",
-  email: "isabella.rodriguez@westridge.edu",
+  name: "Amanda Hill",
+  email: "amanda.h@art.com",
   passwordHash: null,
-  role: "student"
-},
-
-{
-  name: "Ethan Nguyen",
-  studentId: "1006",
-  email: "ethan.nguyen@westridge.edu",
-  passwordHash: null,
-  role: "student"
-},
-
-{
-  name: "Mia Johnson",
-  studentId: "1007",
-  email: "mia.johnson@westridge.edu",
-  passwordHash: null,
-  role: "student"
-},
-
-{
-  name: "Lucas Garcia",
-  studentId: "1008",
-  email: "lucas.garcia@westridge.edu",
-  passwordHash: null,
-  role: "student"
-},
-
-{
-  name: "Charlotte Kim",
-  studentId: "1009",
-  email: "charlotte.kim@westridge.edu",
-  passwordHash: null,
-  role: "student"
-},
-
-{
-  name: "Benjamin Walker",
-  studentId: "1010",
-  email: "benjamin.walker@westridge.edu",
-  passwordHash: null,
+  bio:"",
+  portfolio:"",
   role: "student"
 }
+
 
 ]
 

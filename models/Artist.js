@@ -10,10 +10,6 @@ const artistSchema = new mongoose.Schema({
   },
   bio:String,
   portfolio:String,
-  repPhone:String,
-  website:String,
-  notes:String,
-  iconPath:String
 })
 
 export default mongoose.model("Artist",artistSchema)

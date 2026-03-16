@@ -6,6 +6,7 @@ const artSchema = new mongoose.Schema({
     type:mongoose.Schema.Types.ObjectId,
     ref:"Artist",
   },
+  materials: String,
   desc:String,
   display:Boolean,
   originalName: { type: String, required: true, trim: true },
