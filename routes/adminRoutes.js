@@ -1,8 +1,7 @@
 import express from 'express'
 
-import College from '../models/College.js'
-import User from '../models/User.js'
-import Visit from '../models/Visit.js'
+import Artist from '../models/Artist.js'
+import Artwork from '../models/Artwork.js'
 
 import requireLogin from '../middleware/requireLogin.js'
 import requireAdmin from '../middleware/requireAdmin.js'
