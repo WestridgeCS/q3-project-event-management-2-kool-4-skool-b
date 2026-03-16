@@ -1,15 +1,15 @@
 <%- include('../partials/header') %>
 
 <div class="admin-toolbar">
-  <h1>Colleges</h1>
+  <h1>Artists</h1>
   <div>
     <input
       id="collegeSearch"
       placeholder="Search artworks..."
       class="search-input"
     />
-    <a href="/admin/colleges/new" class="btn-add">
-    + Add College
+    <a href="/admin/artist/new" class="btn-add">
+    + Add Artist
     </a>
   </div>
 </div>
@@ -38,13 +38,13 @@
       <td><%= c.repName || "-" %></td>
       <td><%= c.repEmail || "-" %></td>
       <td>
-        <a href="/admin/colleges/<%= c._id %>/edit"
+        <a href="/admin/artist/<%= c._id %>/edit"
         class="btn-small btn-edit">
         Edit
         </a>
 
         <form method="POST"
-        action="/admin/colleges/<%= c._id %>/delete"
+        action="/admin/artist/<%= c._id %>/delete"
         style="display:inline">
           <button class="btn-small btn-delete">
           Delete

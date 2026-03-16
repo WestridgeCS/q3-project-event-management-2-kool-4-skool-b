@@ -5,8 +5,9 @@ import session from 'express-session';
 import flash from 'connect-flash';
 
 import authRoutes from "./routes/authRoutes.js"
-import studentRoutes from "./routes/studentRoutes.js"
+import artistRoutes from "./routes/artistRoutes.js"
 import adminRoutes from "./routes/adminRoutes.js"
+
 
 import attachUser from './middleware/attachUser.js';
 
