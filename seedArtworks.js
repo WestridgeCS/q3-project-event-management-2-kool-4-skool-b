@@ -1,7 +1,7 @@
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 
-import College from "./models/College.js"
+import College from "./models/Artwork.js"
 
 dotenv.config()
 
@@ -10,10 +10,10 @@ console.log("Connected to MongoDB")
 
 
 await College.deleteMany({})
-console.log("Old colleges cleared")
+console.log("Old artworks cleared")
 
 
-const colleges = [
+const artworks = [
 
 {
 name: "UCLA",
@@ -228,8 +228,8 @@ iconPath: "/uploads/collegeIcons/yale.png"
 ]
 
 
-await College.insertMany(colleges)
+await Artwork.insertMany(artworks)
 
-console.log("Colleges seeded successfully")
+console.log("Artworks seeded successfully")
 
 mongoose.connection.close()

@@ -10,12 +10,12 @@ await mongoose.connect(process.env.MONGODB_URI)
 console.log("Connected to MongoDB")
 
 // Clear existing students
-await User.deleteMany({ role: "student" })
+await User.deleteMany({ role: "artist" })
 
-console.log("Old students removed")
+console.log("Old artists removed")
 
 
-const students = [
+const artists = [
 
 {
   name: "Ava Martinez",
@@ -100,8 +100,8 @@ const students = [
 ]
 
 
-await User.insertMany(students)
+await User.insertMany(artists)
 
-console.log("Students seeded successfully")
+console.log("Artists seeded successfully")
 
 mongoose.connection.close()
