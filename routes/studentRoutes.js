@@ -1,31 +1,31 @@
 import express from 'express'
 
-import College from '../models/College.js'
-import Visit from '../models/Visit.js'
+import Artist from '../models/Artist.js'
+import Artwork from '../models/Artwork.js'
 
 import requireLogin from '../middleware/requireLogin.js'
 
 const router = express.Router()
 
 
-// Student dashboard
+// Public Gallery 
 router.get('/', requireLogin, async (req, res) => {
-  const colleges = await College.find()
-  res.render('student/dashboard', { colleges })
+  const artists = await Artist.find()
+  res.render('student/dashboard', { artist })
 })
 
-// View college page
-router.get('/college/:id', requireLogin, async (req, res) => {
-  const college = await College.findById(req.params.id)
+// View specific artist page
+router.get('/artist/:id', async (req, res) => {
+  const artist = await Artist.findById(req.params.id)
 
-  const visit = await Visit.findOne({
-    student: req.session.userId,
-    college: req.params.id
+  const artwork = await Artwork.findOne({
+    artist: req.session.userId,
+    artwork: req.params.id
   })
 
   res.render('student/college', {
-    college,
-    visit
+    artist,
+    artwork
   })
 
 })
@@ -55,7 +55,7 @@ router.post('/college/:id', requireLogin, async (req, res) => {
   res.redirect('/student')
 })
 
-// Student profile page
+// Artist login page to their profile
 router.get('/profile', requireLogin, async (req, res) => {
   const visits = await Visit
     .find({ student: req.session.userId })
