@@ -1,6 +1,6 @@
 import express from 'express'
 import bcrypt from 'bcrypt'
-import User from '../models/User.js'
+import Artist from '../models/Artist.js'
 
 const router = express.Router()
 
@@ -18,18 +18,18 @@ router.get('/login', (req, res) => {
 router.post('/login/student', async (req, res) => {
   const { name, studentId } = req.body
 
-  const user = await User.findOne({
+  const artist = await Artist.findOne({
     name,
     studentId,
     role: 'student'
   })
 
-  if (!user) {
+  if (!artist) {
     return res.redirect('/login')
   }
 
-  req.session.userId = user._id
-  req.session.role = 'student'
+  req.session.artistId = artist._id
+  req.session.role = 'artist'
 
   res.redirect('/student')
 })
@@ -38,22 +38,22 @@ router.post('/login/student', async (req, res) => {
 router.post('/login/admin', async (req, res) => {
   const { email, password } = req.body
 
-  const user = await User.findOne({
+  const artist = await Artist.findOne({
     email,
     role: 'admin'
   })
 
-  if (!user) {
+  if (!artist) {
     return res.redirect('/login')
   }
 
-  const valid = await bcrypt.compare(password, user.passwordHash)
+  const valid = await bcrypt.compare(password, artist.passwordHash)
 
   if (!valid) {
     return res.redirect('/login')
   }
 
-  req.session.userId = user._id
+  req.session.artistId = artist._id
   req.session.role = 'admin'
 
   res.redirect('/admin')
@@ -86,7 +86,7 @@ router.post('/admin/register', async (req, res) => {
 
   const { name, email, password } = req.body
 
-  const existing = await User.findOne({ email })
+  const existing = await Artist.findOne({ email })
 
   if (existing) {
     return res.send("Admin already exists with that email.")
@@ -94,7 +94,7 @@ router.post('/admin/register', async (req, res) => {
 
   const hash = await bcrypt.hash(password, 10)
 
-  const admin = new User({
+  const admin = new Artist({
     name,
     email,
     passwordHash: hash,
