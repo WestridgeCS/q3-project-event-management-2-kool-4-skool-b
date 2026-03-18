@@ -1,6 +1,9 @@
 import mongoose from "mongoose"
 import dotenv from "dotenv"
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7bb0a3aec6c44638f58e20859c3ec80fe29f8d0c
 import User from "./models/Artist.js"
 import Artist from "./models/Artist.js"
 
