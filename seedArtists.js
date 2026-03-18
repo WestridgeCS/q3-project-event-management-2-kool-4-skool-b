@@ -1,11 +1,7 @@
 import mongoose from "mongoose"
 import dotenv from "dotenv"
-
-<<<<<<< Updated upstream
 import User from "./models/Artist.js"
-=======
 import Artist from "./models/Artist.js"
->>>>>>> Stashed changes
 
 dotenv.config()
 
