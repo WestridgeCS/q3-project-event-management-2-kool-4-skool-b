@@ -2,6 +2,7 @@ import mongoose from "mongoose"
 import dotenv from "dotenv"
 
 import User from "./models/Artist.js"
+import Artist from "./models/Artist.js"
 
 dotenv.config()
 
@@ -11,6 +12,7 @@ console.log("Connected to MongoDB")
 
 // Clear existing students
 await User.deleteMany({ role: "artist" })
+await Artist.deleteMany({ role: "artist" })
 
 console.log("Old artists removed")
 
