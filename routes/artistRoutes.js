@@ -1,6 +1,6 @@
 import express from 'express'
 
-import College from '../models/College.js'
+import Artwork from '../models/Artwork.js'
 import Visit from '../models/Visit.js'
 
 import requireLogin from '../middleware/requireLogin.js'
@@ -10,21 +10,21 @@ const router = express.Router()
 
 // Student dashboard
 router.get('/', requireLogin, async (req, res) => {
-  const colleges = await College.find()
-  res.render('student/dashboard', { colleges })
+  const artworks = await Artwork.find()
+  res.render('student/dashboard', { artworks })
 })
 
-// View college page
-router.get('/college/:id', requireLogin, async (req, res) => {
-  const college = await College.findById(req.params.id)
+// View artwork page
+router.get('/artwork/:id', requireLogin, async (req, res) => {
+  const artwork = await Artwork.findById(req.params.id)
 
   const visit = await Visit.findOne({
     student: req.session.userId,
-    college: req.params.id
+    artwork: req.params.id
   })
 
-  res.render('student/college', {
-    college,
+  res.render('student/artwork', {
+    artwork,
     visit
   })
 
