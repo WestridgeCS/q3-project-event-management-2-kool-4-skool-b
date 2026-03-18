@@ -1,15 +1,15 @@
 <%- include('../partials/header') %>
 
-<h1><%= student.name %></h1>
+<h1><%= artist.name %></h1>
 <table class="table">
   <tr>
-    <th>College</th>
+    <th>Artwork</th>
     <th>Interested</th>
     <th>Notes</th>
   </tr>
   <% visits.forEach(v => { %>
   <tr>
-    <td><%= v.college.name %></td>
+    <td><%= v.artwork.name %></td>
     <td>
       <% if (v.interested) { %>
       ⭐

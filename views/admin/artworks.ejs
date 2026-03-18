@@ -8,8 +8,8 @@
       placeholder="Search artworks..."
       class="search-input"
     />
-    <a href="/admin/colleges/new" class="btn-add">
-    + Add College
+    <a href="/admin/artworks/new" class="btn-add">
+    + Add Artwork
     </a>
   </div>
 </div>
@@ -38,13 +38,13 @@
       <td><%= c.repName || "-" %></td>
       <td><%= c.repEmail || "-" %></td>
       <td>
-        <a href="/admin/colleges/<%= c._id %>/edit"
+        <a href="/admin/artworks/<%= c._id %>/edit"
         class="btn-small btn-edit">
         Edit
         </a>
 
         <form method="POST"
-        action="/admin/colleges/<%= c._id %>/delete"
+        action="/admin/artworks/<%= c._id %>/delete"
         style="display:inline">
           <button class="btn-small btn-delete">
           Delete
