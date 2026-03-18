@@ -4,24 +4,24 @@ import Artist from '../models/Artist.js'
 
 const router = express.Router()
 
-// Login page
+// Login page for all people (guests click ignore)
 router.get('/', (req, res) => {
   res.redirect('/login')
 })
 
-// Authenticated Login page
+// Authenticated Login page for artists/admin
 router.get('/login', (req, res) => {
   res.render('auth/login')
 })
 
 // Artist login
 router.post('/login/artist', async (req, res) => {
-  const { name, studentId } = req.body
+  const { name, artistId } = req.body
 
   const artist = await Artist.findOne({
     name,
-    studentId,
-    role: 'student'
+    artistId,
+    role: 'artist'
   })
 
   if (!artist) {
@@ -31,19 +31,19 @@ router.post('/login/artist', async (req, res) => {
   req.session.artistId = artist._id
   req.session.role = 'artist'
 
-  res.redirect('/student')
+  res.redirect('/artist')
 })
 
 // Admin login
 router.post('/login/admin', async (req, res) => {
   const { email, password } = req.body
 
-  const artist = await Artist.findOne({
+  const admin = await Artist.findOne({
     email,
     role: 'admin'
   })
 
-  if (!artist) {
+  if (!admin) {
     return res.redirect('/login')
   }
 

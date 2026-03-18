@@ -11,15 +11,15 @@
   <% data.forEach(row => { %>
   <tr>
     <td>
-      <a href="/admin/students/<%= row.student._id %>">
-      <%= row.student.name %>
+      <a href="/admin/artists/<%= row.artist._id %>">
+      <%= row.artist.name %>
       </a>
     </td>
     <td><%= row.visitCount %></td>
     <td>
       <% row.interested.forEach(v => { %>
       <span class="tag">
-      <%= v.college.name %>
+      <%= v.artwork.name %>
       </span>
       <% }) %>
     </td>

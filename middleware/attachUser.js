@@ -1,20 +1,20 @@
-import User from "../models/User.js"
+import Artist from "../models/Artist.js"
 
-export default async function attachUser(req, res, next) {
+export default async function attachArtist(req, res, next) {
 
   // default values so EJS never crashes
-  res.locals.currentUser = null
+  res.locals.currentArtist = null
   res.locals.role = null
 
-  if (!req.session.userId) {
+  if (!req.session.artistId) {
     return next()
   }
 
   try {
 
-    const user = await User.findById(req.session.userId)
+    const artist = await Artist.findById(req.session.artistId)
 
-    res.locals.currentUser = user
+    res.locals.currentArtist = artist
     res.locals.role = req.session.role
 
   } catch (err) {
