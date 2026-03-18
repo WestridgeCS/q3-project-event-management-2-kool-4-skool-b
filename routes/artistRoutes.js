@@ -8,7 +8,6 @@ import requireLogin from '../middleware/requireLogin.js'
 const router = express.Router()
 
 
-// Student dashboard
 // Artist dashboard
 router.get('/', requireLogin, async (req, res) => {
   const artworks = await Artwork.find()
