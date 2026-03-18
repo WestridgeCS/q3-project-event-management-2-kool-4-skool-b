@@ -23,6 +23,35 @@ router.get('/artwork/:id', requireLogin, async (req, res) => {
 
 })
 
+
+// Save visit notes
+// router.post('/college/:id', requireLogin, async (req, res) => {
+//   const { notes, interested } = req.body;
+// // Save visit notes
+// router.post('/college/:id', requireLogin, async (req, res) => {
+//   const { notes, interested } = req.body
+
+//   let visit = await Visit.findOne({
+//     student: req.session.userId,
+//     college: req.params.id
+//   })
+
+//   if (!visit) {
+//     visit = new Visit({
+//       student: req.session.userId,
+//       college: req.params.id
+//     })
+//   }
+
+//   visit.notes = notes
+//   visit.interested = interested === 'on'
+
+//   await visit.save()
+
+//   res.redirect('/student')
+// })
+
+// Student profile page
 // Artist profile page
 router.get('/profile', requireLogin, async (req, res) => {
   
