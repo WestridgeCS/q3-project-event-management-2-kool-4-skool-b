@@ -10,55 +10,24 @@ const router = express.Router()
 // Artist dashboard
 router.get('/', requireLogin, async (req, res) => {
   const artworks = await Artwork.find()
-  res.render('artist/dashboard', { artworks })
+  res.render('student/dashboard', { artworks })
 })
 
 // View artwork page
 router.get('/artwork/:id', requireLogin, async (req, res) => {
   const artwork = await Artwork.findById(req.params.id)
 
-  res.render('artist/artwork', {
-    artwork
-
+  res.render('student/artwork', {
+    artwork,
   })
 
 })
 
-
-// Save visit notes
-router.post('/college/:id', requireLogin, async (req, res) => {
-  const { notes, interested } = req.body;
-// // Save visit notes
-// router.post('/college/:id', requireLogin, async (req, res) => {
-//   const { notes, interested } = req.body
-
-//   let visit = await Visit.findOne({
-//     student: req.session.userId,
-//     college: req.params.id
-//   })
-
-//   if (!visit) {
-//     visit = new Visit({
-//       student: req.session.userId,
-//       college: req.params.id
-//     })
-//   }
-
-//   visit.notes = notes
-//   visit.interested = interested === 'on'
-
-//   await visit.save()
-
-//   res.redirect('/student')
-// })
-
-// Student profile page
+// Artist profile page
 router.get('/profile', requireLogin, async (req, res) => {
-
-
-  res.render('artist/profile', {
-    
-  })
+  
+  res.render('student/profile')
+  
 })
 
 export default router

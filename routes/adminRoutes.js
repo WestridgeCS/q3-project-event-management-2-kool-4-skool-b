@@ -25,14 +25,14 @@ const upload = multer({ storage })
 
 // Admin dashboard
 router.get('/admin', requireLogin, requireAdmin, (req, res) => {
-  res.render('admin/dashboard')
+  res.render('admin/artistDetail')
 })
 
 // Admin dashboard of all artists
 router.get('/admin/artist', requireLogin, requireAdmin, async (req, res) => {
   const artists = await Artist.find()
 
-  res.render('admin/colleges', { artists })
+  res.render('admin/artists', { artists })
 })
 
 
@@ -56,7 +56,7 @@ router.get('/admin/artist/artwork', requireLogin, requireAdmin, async (req, res)
 
   }
 
-  res.render('admin/students', { data })
+  res.render('admin/artworks', { data })
 })
 
 // Artist detail page
@@ -67,21 +67,20 @@ router.get('/artist/:id', requireLogin, requireAdmin, async (req, res) => {
     .find({ student: req.params.id })
     .populate('college')
 
-  res.render('admin/studentDetail', {
+  res.render('admin/artistDetail', {
     student,
-    visits
   })
 })
 
 // GET - Add a new artist
 router.get('/admin/artist/new', requireLogin, requireAdmin, (req,res)=>{
-  res.render('admin/newCollege')
+  res.render('admin/newArtist')
 })
 
 // GET - Edit an artist page
 router.get('/admin/artist/:id', requireLogin, requireAdmin, async (req,res)=>{
   const artist = await Artist.findById(req.params.id)
-  res.render('admin/editCollege',{college})
+  res.render('admin/editArtist',{college})
 })
 
 // POST - Add a new artwork
@@ -110,7 +109,7 @@ router.post('/artwork/new', requireLogin, requireAdmin, upload.single("icon"), a
 
   await college.save()
 
-  res.redirect("/admin/colleges")
+  res.redirect("/admin/artists")
 })
 
 // POST - Edit an artwork
@@ -130,13 +129,13 @@ router.post('/artwork/:id', requireLogin, requireAdmin, upload.single("icon"), a
 
   await college.save()
 
-  res.redirect("/admin/colleges")
+  res.redirect("/admin/artist/artwork")
 })
 
 // Delete an artwork
 router.post('/artwork/:id/delete', requireLogin, requireAdmin, async (req,res)=>{
   await Artwork.findByIdAndDelete(req.params.id)
-  res.redirect("/admin/colleges")
+  res.redirect("/admin/artist/artwork")
 })
 
 export default router
