@@ -1,7 +1,11 @@
 import mongoose from "mongoose"
 import dotenv from "dotenv"
 
+<<<<<<< Updated upstream
 import User from "./models/Artist.js"
+=======
+import Artist from "./models/Artist.js"
+>>>>>>> Stashed changes
 
 dotenv.config()
 
@@ -10,7 +14,7 @@ await mongoose.connect(process.env.MONGODB_URI)
 console.log("Connected to MongoDB")
 
 // Clear existing students
-await User.deleteMany({ role: "artist" })
+await Artist.deleteMany({ role: "artist" })
 
 console.log("Old artists removed")
 

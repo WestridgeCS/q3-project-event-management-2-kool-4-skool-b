@@ -8,6 +8,7 @@ import authRoutes from "./routes/authRoutes.js"
 import artistRoutes from "./routes/artistRoutes.js"
 import adminRoutes from "./routes/adminRoutes.js"
 
+
 import attachUser from './middleware/attachUser.js';
 
 dotenv.config();

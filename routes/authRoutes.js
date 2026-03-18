@@ -9,13 +9,13 @@ router.get('/', (req, res) => {
   res.redirect('/login')
 })
 
-// Login page
+// Authenticated Login page
 router.get('/login', (req, res) => {
   res.render('auth/login')
 })
 
-// Student login
-router.post('/login/student', async (req, res) => {
+// Artist login
+router.post('/login/artist', async (req, res) => {
   const { name, studentId } = req.body
 
   const artist = await Artist.findOne({
