@@ -26,8 +26,8 @@ router.get('/artwork/:id', requireLogin, async (req, res) => {
 
 
 // Save visit notes
-router.post('/college/:id', requireLogin, async (req, res) => {
-  const { notes, interested } = req.body;
+// router.post('/college/:id', requireLogin, async (req, res) => {
+//   const { notes, interested } = req.body;
 // // Save visit notes
 // router.post('/college/:id', requireLogin, async (req, res) => {
 //   const { notes, interested } = req.body
