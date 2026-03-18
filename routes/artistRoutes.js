@@ -10,16 +10,15 @@ const router = express.Router()
 // Artist dashboard
 router.get('/', requireLogin, async (req, res) => {
   const artworks = await Artwork.find()
-  res.render('artist/dashboard', { artworks })
+  res.render('student/dashboard', { artworks })
 })
 
 // View artwork page
 router.get('/artwork/:id', requireLogin, async (req, res) => {
   const artwork = await Artwork.findById(req.params.id)
 
-  res.render('artist/artwork', {
-    artwork
-
+  res.render('student/artwork', {
+    artwork,
   })
 
 })
@@ -53,12 +52,11 @@ router.get('/artwork/:id', requireLogin, async (req, res) => {
 // })
 
 // Student profile page
+// Artist profile page
 router.get('/profile', requireLogin, async (req, res) => {
-
-
-  res.render('artist/profile', {
-    
-  })
+  
+  res.render('student/profile')
+  
 })
 
 export default router
