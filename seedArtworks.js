@@ -27,7 +27,7 @@ iconPath: "/uploads/collegeIcons/ucla.png"
 title: "Depth",
 creator: "Alex Ramirez",
 materials:"Oils on canvas",
-desc: "Private research university in Los Angeles with strong alumni network and film school.",
+desc: "A vibrant painting exploring the idea that 'eyes are the window to the soul' as the painting seems to depict an unending depth within the pupil.",
 iconPath: "/uploads/collegeIcons/usc.png"
 },
 
@@ -35,7 +35,7 @@ iconPath: "/uploads/collegeIcons/usc.png"
 title: "Self Portrait with Pastels",
 creator: "Alex Ramirez",
 materials:"Oil pastels on canvas",
-desc: "Highly selective research university located in Silicon Valley.",
+desc: "A vibrant self portrait, Ramirex depicts himself standing infront of a potted plant. This is likely a reference to his upbrining with gardeners.",
 iconPath: "/uploads/collegeIcons/stanford.png"
 },
 
@@ -43,7 +43,7 @@ iconPath: "/uploads/collegeIcons/stanford.png"
 title: "86",
 creator: "Alex Ramirez",
 materials:"Oils and pastels on canvas",
-desc: "Small Pasadena-based institute specializing in science and engineering.",
+desc: "The painting depicts 86 cats playing in a bring field. All is peaceful.",
 iconPath: "/uploads/collegeIcons/caltech.png"
 },
 
@@ -51,7 +51,7 @@ iconPath: "/uploads/collegeIcons/caltech.png"
 title: "Smile #4",
 creator: "Alex Ramirez",
 materials:"Oils on canvas, metal",
-desc: "Liberal arts college in Claremont known for strong academics and small classes.",
+desc: "A darker departure from his normal work, this piece is part of his 'Smile' series. The smile in this painting shows Ramirez's struggles with mental health.",
 iconPath: "/uploads/collegeIcons/pomona.png"
 },
 
@@ -59,7 +59,7 @@ iconPath: "/uploads/collegeIcons/pomona.png"
 title: "Fish in a Barrel",
 creator: "Sarah Nguyen",
 materials:"Colored pencils on printer paper",
-desc: "STEM-focused liberal arts college within the Claremont Colleges.",
+desc: "asdfghjnkml,;.;';lkjhgfd",
 iconPath: "/uploads/collegeIcons/hmc.png"
 },
 
