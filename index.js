@@ -29,7 +29,7 @@ app.set('views', './views');
 
 // Sessions
 app.use(session({
-  secret: process.env.SESSION_SECRET || 'dev-secret',
+  secret: process.env.SESSION_SECRET || 'iLoveOrks5109',
   resave: false,
   saveUninitialized: false
 }));
@@ -42,7 +42,7 @@ app.use(attachUser);
 
 // Routes
 app.use("/",authRoutes)
-app.use("/student",studentRoutes)
+app.use("/artist",artistRoutes)
 app.use("/admin",adminRoutes)
 
 // Basic error handler (so students see something helpful)
