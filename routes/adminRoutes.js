@@ -38,12 +38,12 @@ router.get('/admin/artist', requireLogin, requireAdmin, async (req, res) => {
 
 // Admin dashboard of all artworks
 router.get('/admin/artist/artwork', requireLogin, requireAdmin, async (req, res) => {
-  const artwork = await Artwork.find({ role: 'student' })
+  const artist = await Artist.find({ role: 'artist' })
   const data = []
 
-  for (let student of students) {
-    const visits = await Visit
-      .find({ student: student._id })
+  for (let artist of artists) {
+    const artworks = await Artwork
+      .find({ artwork: artwork._id })
       .populate('college')
 
     const interested = visits.filter(v => v.interested)

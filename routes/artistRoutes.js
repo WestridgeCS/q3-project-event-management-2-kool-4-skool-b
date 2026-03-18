@@ -9,6 +9,7 @@ const router = express.Router()
 
 
 // Student dashboard
+// Artist dashboard
 router.get('/', requireLogin, async (req, res) => {
   const artworks = await Artwork.find()
   res.render('student/dashboard', { artworks })
