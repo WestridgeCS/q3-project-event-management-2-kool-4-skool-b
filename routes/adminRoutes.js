@@ -37,7 +37,7 @@ router.get('/admin/artist', requireLogin, requireAdmin, async (req, res) => {
 
 
 // Admin dashboard of all artworks
-router.get('/admin/artwork', requireLogin, requireAdmin, async (req, res) => {
+router.get('/admin/artist/artwork', requireLogin, requireAdmin, async (req, res) => {
   const artwork = await Artwork.find({ role: 'student' })
   const data = []
 
