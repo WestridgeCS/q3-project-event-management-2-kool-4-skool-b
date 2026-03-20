@@ -4,17 +4,15 @@ import Artist from '../models/Artist.js'
 
 const router = express.Router()
 
-// Login page for all people (guests click ignore)
+//Default login page
 router.get('/', (req, res) => {
   res.redirect('/login')
 })
-
-// Authenticated Login page for artists/admin
+//Authenticated Login
 router.get('/login', (req, res) => {
   res.render('auth/login')
 })
-
-// Artist login
+//Login Page for Artists
 router.post('/login/artist', async (req, res) => {
   const { name, artistId } = req.body
 
@@ -33,8 +31,7 @@ router.post('/login/artist', async (req, res) => {
 
   res.redirect('/artist')
 })
-
-// Admin login
+//Login Page for Admin
 router.post('/login/admin', async (req, res) => {
   const { email, password } = req.body
 
@@ -43,30 +40,28 @@ router.post('/login/admin', async (req, res) => {
     role: 'admin'
   })
 
-  if (!admin) {
+  if (!admin || !admin.passwordHash) {
     return res.redirect('/login')
   }
-
-  const valid = await bcrypt.compare(password, artist.passwordHash)
+  //Compare passwords for authentication
+  const valid = await bcrypt.compare(password, admin.passwordHash)
 
   if (!valid) {
     return res.redirect('/login')
   }
 
-  req.session.artistId = artist._id
+  req.session.artistId = admin._id
   req.session.role = 'admin'
 
   res.redirect('/admin')
 })
-
-// Logout
+//Logout for Everybody
 router.get('/logout', (req, res) => {
   req.session.destroy(() => {
     res.redirect('/login')
   })
 })
 
-// Admin registration page (invite only)
 router.get('/admin/register', (req, res) => {
   if (req.query.token !== process.env.ADMIN_INVITE_TOKEN) {
     return res.status(403).send("Unauthorized")
@@ -76,9 +71,7 @@ router.get('/admin/register', (req, res) => {
     token: req.query.token
   })
 })
-
-
-// Create admin account
+//Make an Admin
 router.post('/admin/register', async (req, res) => {
   if (req.body.token !== process.env.ADMIN_INVITE_TOKEN) {
     return res.status(403).send("Unauthorized")
