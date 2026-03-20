@@ -1,5 +1,6 @@
 import mongoose from "mongoose"
 import dotenv from "dotenv"
+
 import Artist from "./models/Artist.js"
 
 dotenv.config()
@@ -71,7 +72,7 @@ const artists = [
 ]
 
 
-await User.insertMany(artists)
+await Artist.insertMany(artists)
 
 console.log("Artists seeded successfully")
 
