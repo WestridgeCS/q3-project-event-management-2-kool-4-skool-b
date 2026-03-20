@@ -1,23 +1,32 @@
 <%- include('../partials/header') %>
 
 <h1><%= artist.name %></h1>
-<table class="table">
-  <tr>
-    <th>Artwork</th>
-    <th>Interested</th>
-    <th>Notes</th>
-  </tr>
-  <% visits.forEach(v => { %>
-  <tr>
-    <td><%= v.artwork.name %></td>
-    <td>
-      <% if (v.interested) { %>
-      ⭐
-      <% } %>
-    </td>
-    <td><%= v.notes %></td>
-  </tr>
-  <% }) %>
-</table>
+
+<p><strong>Email:</strong> <%= artist.email || "—" %></p>
+<p><strong>Bio:</strong> <%= artist.bio || "—" %></p>
+<p><strong>Portfolio:</strong> <%= artist.portfolio || "—" %></p>
+
+<h2>Artworks</h2>
+
+<% if (artworks.length === 0) { %>
+  <p>No artworks yet.</p>
+<% } else { %>
+  <table class="table">
+    <tr>
+      <th>Title</th>
+      <th>Materials</th>
+      <th>Description</th>
+      <th>Display</th>
+    </tr>
+    <% artworks.forEach(artwork => { %>
+      <tr>
+        <td><%= artwork.title %></td>
+        <td><%= artwork.materials || "—" %></td>
+        <td><%= artwork.desc || "—" %></td>
+        <td><%= artwork.display ? "Yes" : "No" %></td>
+      </tr>
+    <% }) %>
+  </table>
+<% } %>
 
 <%- include('../partials/footer') %>

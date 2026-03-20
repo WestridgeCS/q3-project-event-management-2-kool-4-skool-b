@@ -1,62 +1,32 @@
 import express from 'express'
-
 import Artwork from '../models/Artwork.js'
-
+import Artist from '../models/Artist.js'
 import requireLogin from '../middleware/requireLogin.js'
 
 const router = express.Router()
 
-
-// Artist dashboard
+//Load up the artist dashboard
 router.get('/', requireLogin, async (req, res) => {
-  const artworks = await Artwork.find()
-  res.render('student/dashboard', { artworks })
+  const artworks = await Artwork.find({ creator: req.session.artistId })
+  res.render('artist/dashboard', { artworks })
 })
-
-// View artwork page
+//Load up the artworks
 router.get('/artwork/:id', requireLogin, async (req, res) => {
-  const artwork = await Artwork.findById(req.params.id)
+  const artwork = await Artwork.findOne({
+    _id: req.params.id,
+    creator: req.session.artistId
+  }).populate('creator')
 
-  res.render('student/artwork', {
-    artwork,
-  })
+  if (!artwork) {
+    return res.status(404).send('Artwork not found')
+  }
 
+  res.render('artist/artwork', { artwork })
 })
-
-
-// Save visit notes
-// router.post('/college/:id', requireLogin, async (req, res) => {
-//   const { notes, interested } = req.body;
-// // Save visit notes
-// router.post('/college/:id', requireLogin, async (req, res) => {
-//   const { notes, interested } = req.body
-
-//   let visit = await Visit.findOne({
-//     student: req.session.userId,
-//     college: req.params.id
-//   })
-
-//   if (!visit) {
-//     visit = new Visit({
-//       student: req.session.userId,
-//       college: req.params.id
-//     })
-//   }
-
-//   visit.notes = notes
-//   visit.interested = interested === 'on'
-
-//   await visit.save()
-
-//   res.redirect('/student')
-// })
-
-// Student profile page
-// Artist profile page
+//Load up the artist profile
 router.get('/profile', requireLogin, async (req, res) => {
-  
-  res.render('student/profile')
-  
+  const artist = await Artist.findById(req.session.artistId)
+  res.render('artist/profile', { artist })
 })
 
 export default router

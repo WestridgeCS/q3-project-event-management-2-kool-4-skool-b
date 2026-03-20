@@ -1,7 +1,9 @@
 <%- include('../partials/header') %>
+
 <h1>Start</h1>
 <div class="login-grid">
   <div class="card">
+
     <h2>Guest Login</h2>
     <form method="POST" action="/login/student">
       <label>Name</label>
@@ -20,6 +22,15 @@
       <label>Student ID</label>
       <input name="studentId" required>
 
+    <h2>Artist Login</h2>
+    <form method="POST" action="/login/artist">
+      <label>Name</label>
+      <input name="name" required>
+
+      <label>Artist ID</label>
+      <input name="artistId" required>
+
+
       <button class="btn">Login</button>
     </form>
   </div>
@@ -28,10 +39,10 @@
     <h2>Admin Login</h2>
     <form method="POST" action="/login/admin">
       <label>Email</label>
-      <input name="email">
+      <input name="email" required>
 
       <label>Password</label>
-      <input type="password" name="password">
+      <input type="password" name="password" required>
 
       <button class="btn">Login</button>
     </form>

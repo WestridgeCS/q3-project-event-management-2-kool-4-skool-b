@@ -1,72 +1,32 @@
 <%- include('../partials/header') %>
 
-<div class="admin-toolbar">
-  <h1>Artists</h1>
-  <div>
-    <input
-      id="collegeSearch"
-      placeholder="Search artworks..."
-      class="search-input"
-    />
-
-    <a href="/admin/artworks/new" class="btn-add">
-    + Add Artwork
-</a>
-    <a href="/admin/artist/new" class="btn-add">
-    + Add Artist
-
-    </a>
-  </div>
-</div>
+<h1>Artworks</h1>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Logo</th>
-      <th>Name</th>
-      <th>Representative</th>
-      <th>Email</th>
+      <th>Title</th>
+      <th>Artist</th>
+      <th>Materials</th>
+      <th>Display</th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-    <% artworks.forEach(c => { %>
-    <tr data-name="<%= c.name.toLowerCase() %>">
-      <td>
-        <% if (c.iconPath) { %>
-        <img src="<%= c.iconPath %>" style="width:40px">
-        <% } else { %>
-        —
-        <% } %>
-      </td>
-      <td><strong><%= c.name %></strong></td>
-      <td><%= c.repName || "-" %></td>
-      <td><%= c.repEmail || "-" %></td>
-      <td>
-
-        <a href="/admin/artworks/<%= c._id %>/edit">
-</a>
-        <a href="/admin/artist/<%= c._id %>/edit"
-        class="btn-small btn-edit">
-        Edit
-        </a>
-
-        <form method="POST"
-
-        action="/admin/artworks/<%= c._id %>/delete"
-
-        action="/admin/artist/<%= c._id %>/delete"
-
-        style="display:inline">
-          <button class="btn-small btn-delete">
-          Delete
-          </button>
-        </form>
-      </td>
-    </tr>
+    <% artworks.forEach(artwork => { %>
+      <tr>
+        <td><%= artwork.title %></td>
+        <td><%= artwork.creator ? artwork.creator.name : "-" %></td>
+        <td><%= artwork.materials || "-" %></td>
+        <td><%= artwork.display ? "Yes" : "No" %></td>
+        <td>
+          <form method="POST" action="/artwork/<%= artwork._id %>/delete" style="display:inline">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
     <% }) %>
   </tbody>
 </table>
 
-<script src="/script.js"></script>
 <%- include('../partials/footer') %>
