@@ -1,41 +1,41 @@
 <%- include('../partials/header') %>
 
-<h1>Edit College</h1>
+<h1>Edit Artworks</h1>
 
 <p class="subtitle">
-Update college details and contact information.
+Update artwork details and contact information.
 </p>
 
 <div class="card">
-  <form method="POST" action="/admin/colleges/<%= college._id %>" enctype="multipart/form-data">
-    <label>College Name</label>
-    <input name="name" value="<%= college.name %>" required>
+  <form method="POST" action="/admin/artworks/<%= artwork._id %>" enctype="multipart/form-data">
+    <label>Artwork Name</label>
+    <input name="name" value="<%= artwork.name %>" required>
 
     <label>Representative Name</label>
-    <input name="repName" value="<%= college.repName %>">
+    <input name="repName" value="<%= artwork.repName %>">
 
     <label>Representative Email</label>
-    <input name="repEmail" value="<%= college.repEmail %>">
+    <input name="repEmail" value="<%= artwork.repEmail %>">
 
     <label>Representative Phone</label>
-    <input name="repPhone" value="<%= college.repPhone %>">
+    <input name="repPhone" value="<%= artwork.repPhone %>">
 
     <label>Website</label>
-    <input name="website" value="<%= college.website %>">
+    <input name="website" value="<%= artwork.website %>">
 
     <label>Notes</label>
-    <textarea name="notes"><%= college.notes %></textarea>
+    <textarea name="notes"><%= artwork.notes %></textarea>
 
-    <label>College Logo</label>
-    <% if (college.iconPath) { %>
+    <label>Artwork Logo</label>
+    <% if (artwork.iconPath) { %>
     <div class="logo-preview">
-      <img src="<%= college.iconPath %>" class="college-logo">
+      <img src="<%= artwork.iconPath %>" class="college-logo">
     </div>
     <% } %>
 
     <input type="file" name="icon">
 
-    <button class="btn">Update College</button>
+    <button class="btn">Update Artwork</button>
   </form>
 
 </div>

@@ -1,6 +1,10 @@
 import mongoose from "mongoose"
 import dotenv from "dotenv"
+
+
+
 import bcrypt from "bcrypt"
+
 import Artist from "./models/Artist.js"
 
 dotenv.config()
@@ -83,6 +87,13 @@ const inserted = await Artist.insertMany(artists)
       role: u.role
     }))
   )
+
+
+await Artist.insertMany(artists)
+
+console.log("Artists seeded successfully")
+
+mongoose.connection.close()
 
   console.log("Artists seeded successfully")
 } 
