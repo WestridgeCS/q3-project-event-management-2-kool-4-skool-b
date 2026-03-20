@@ -1,14 +1,14 @@
 <%- include('../partials/header') %>
 
-<h1>Add New College</h1>
+<h1>Add New artwork</h1>
 
 <p class="subtitle">
-Create a new college entry for the campus event.
+Create a new artwork entry for the campus event.
 </p>
 
 <div class="card">
-  <form method="POST" action="/admin/colleges" enctype="multipart/form-data">
-    <label>College Name</label>
+  <form method="POST" action="/admin/artwork" enctype="multipart/form-data">
+    <label>Artwork Name</label>
     <input name="name" required>
 
     <label>Representative Name</label>
@@ -26,10 +26,10 @@ Create a new college entry for the campus event.
     <label>Notes</label>
     <textarea name="notes"></textarea>
 
-    <label>College Logo</label>
+    <label>Artwork Logo</label>
     <input type="file" name="icon">
 
-    <button class="btn">Create College</button>
+    <button class="btn">Create Artwork</button>
   </form>
 </div>
 
