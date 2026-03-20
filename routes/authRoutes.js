@@ -1,72 +1,67 @@
 import express from 'express'
 import bcrypt from 'bcrypt'
-import User from '../models/User.js'
+import Artist from '../models/Artist.js'
 
 const router = express.Router()
 
-// Login page
+//Default login page
 router.get('/', (req, res) => {
   res.redirect('/login')
 })
-
-// Login page
+//Authenticated Login
 router.get('/login', (req, res) => {
   res.render('auth/login')
 })
+//Login Page for Artists
+router.post('/login/artist', async (req, res) => {
+  const { name, artistId } = req.body
 
-// Student login
-router.post('/login/student', async (req, res) => {
-  const { name, studentId } = req.body
-
-  const user = await User.findOne({
+  const artist = await Artist.findOne({
     name,
-    studentId,
-    role: 'student'
+    artistId,
+    role: 'artist'
   })
 
-  if (!user) {
+  if (!artist) {
     return res.redirect('/login')
   }
 
-  req.session.userId = user._id
-  req.session.role = 'student'
+  req.session.artistId = artist._id
+  req.session.role = 'artist'
 
-  res.redirect('/student')
+  res.redirect('/artist')
 })
-
-// Admin login
+//Login Page for Admin
 router.post('/login/admin', async (req, res) => {
   const { email, password } = req.body
 
-  const user = await User.findOne({
+  const admin = await Artist.findOne({
     email,
     role: 'admin'
   })
 
-  if (!user) {
+  if (!admin || !admin.passwordHash) {
     return res.redirect('/login')
   }
-
-  const valid = await bcrypt.compare(password, user.passwordHash)
+  //Compare passwords for authentication
+  const valid = await bcrypt.compare(password, admin.passwordHash)
 
   if (!valid) {
     return res.redirect('/login')
   }
 
-  req.session.userId = user._id
+  req.session.artistId = admin._id
   req.session.role = 'admin'
 
   res.redirect('/admin')
 })
-
-// Logout
+//Logout for Everybody
 router.get('/logout', (req, res) => {
   req.session.destroy(() => {
     res.redirect('/login')
   })
 })
 
-// Admin registration page (invite only)
 router.get('/admin/register', (req, res) => {
   if (req.query.token !== process.env.ADMIN_INVITE_TOKEN) {
     return res.status(403).send("Unauthorized")
@@ -76,9 +71,7 @@ router.get('/admin/register', (req, res) => {
     token: req.query.token
   })
 })
-
-
-// Create admin account
+//Make an Admin
 router.post('/admin/register', async (req, res) => {
   if (req.body.token !== process.env.ADMIN_INVITE_TOKEN) {
     return res.status(403).send("Unauthorized")
@@ -86,7 +79,7 @@ router.post('/admin/register', async (req, res) => {
 
   const { name, email, password } = req.body
 
-  const existing = await User.findOne({ email })
+  const existing = await Artist.findOne({ email })
 
   if (existing) {
     return res.send("Admin already exists with that email.")
@@ -94,7 +87,7 @@ router.post('/admin/register', async (req, res) => {
 
   const hash = await bcrypt.hash(password, 10)
 
-  const admin = new User({
+  const admin = new Artist({
     name,
     email,
     passwordHash: hash,

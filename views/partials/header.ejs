@@ -2,19 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Campus Event Manager</title>
+  <title>Super Cool Art Gallery</title>
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
 <header class="topbar">
   <div class="logo">
-    🎓 Campus Event Manager
+   Super Cool Art Gallery
   </div>
   <nav>
-    <% if (currentUser) { %>
-      <% if (role === "student") { %>
-        <a href="/student">Dashboard</a>
-        <a href="/student/profile">My Colleges</a>
+    <% if (currentArtist) { %>
+      <% if (role === "artist") { %>
+        <a href="/artist">Artist Dashboard</a>
+        <a href="/artist/profile">My Work</a>
       <% } %>
 
       <% if (role === "admin") { %>

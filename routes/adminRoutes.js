@@ -1,143 +1,70 @@
 import express from 'express'
 
-import College from '../models/College.js'
-import User from '../models/User.js'
-import Visit from '../models/Visit.js'
+import Artist from '../models/Artist.js'
+import Artwork from '../models/Artwork.js'
 
 import requireLogin from '../middleware/requireLogin.js'
 import requireAdmin from '../middleware/requireAdmin.js'
 
 const router = express.Router()
 
-import multer from "multer"
-import path from "path"
+// import multer from "multer"
+// import path from "path"
 
-const storage = multer.diskStorage({
-  destination: (req,file,cb)=>{
-    cb(null,"uploads/collegeIcons")
-  },
+// const storage = multer.diskStorage({
+//   destination: (req,file,cb)=>{
+//     cb(null,"uploads/collegeIcons")
+//   },
 
-  filename: (req,file,cb)=>{
-    cb(null, Date.now() + path.extname(file.originalname))
-  }
-})
+//   filename: (req,file,cb)=>{
+//     cb(null, Date.now() + path.extname(file.originalname))
+//   }
+// })
 
-const upload = multer({ storage })
+// const upload = multer({ storage })
 
-// Admin dashboard
 router.get('/', requireLogin, requireAdmin, (req, res) => {
   res.render('admin/dashboard')
 })
 
-// Colleges dashboard
-router.get('/colleges', requireLogin, requireAdmin, async (req, res) => {
-  const colleges = await College.find()
-
-  res.render('admin/colleges', { colleges })
+router.get('/artist', requireLogin, requireAdmin, async (req, res) => {
+  const artists = await Artist.find({ role: 'artist' })
+  res.render('admin/artists', { artists })
 })
 
+router.get('/artwork', requireLogin, requireAdmin, async (req, res) => {
+  const artworks = await Artwork.find().populate('creator')
+  res.render('admin/artworks', { artworks })
+})
 
-// Students dashboard
-router.get('/students', requireLogin, requireAdmin, async (req, res) => {
-  const students = await User.find({ role: 'student' })
-  const data = []
+router.get('/admin/artist/:id', requireLogin, requireAdmin, async (req, res) => {
+  const artist = await Artist.findById(req.params.id)
+  const artworks = await Artwork.find({ creator: req.params.id })
 
-  for (let student of students) {
-    const visits = await Visit
-      .find({ student: student._id })
-      .populate('college')
-
-    const interested = visits.filter(v => v.interested)
-
-    data.push({
-      student,
-      visitCount: visits.length,
-      interested
-    })
-
+  if (!artist) {
+    return res.status(404).send('Artist not found')
   }
 
-  res.render('admin/students', { data })
+  res.render('admin/artistDetail', { artist, artworks })
 })
 
-// Student detail page
-router.get('/students/:id', requireLogin, requireAdmin, async (req, res) => {
-  const student = await User.findById(req.params.id)
-
-  const visits = await Visit
-    .find({ student: req.params.id })
-    .populate('college')
-
-  res.render('admin/studentDetail', {
-    student,
-    visits
-  })
+router.get('/admin/artist/new', requireLogin, requireAdmin, (req,res)=>{
+  res.render('admin/newArtist')
 })
 
-// GET - Add a new college
-router.get('/colleges/new', requireLogin, requireAdmin, (req,res)=>{
-  res.render('admin/newCollege')
-})
+router.get('/admin/artist/:id/edit', requireLogin, requireAdmin, async (req,res)=>{
+  const artist = await Artist.findById(req.params.id)
 
-// GET - Edit a college
-router.get('/colleges/:id/edit', requireLogin, requireAdmin, async (req,res)=>{
-  const college = await College.findById(req.params.id)
-  res.render('admin/editCollege',{college})
-})
-
-// POST - Add a new college
-router.post('/colleges', requireLogin, requireAdmin, upload.single("icon"), async (req,res)=>{
-  const {
-    name,
-    repName,
-    repEmail,
-    repPhone,
-    website,
-    notes
-  } = req.body
-
-  const college = new College({
-    name,
-    repName,
-    repEmail,
-    repPhone,
-    website,
-    notes
-  })
-
-  if (req.file) {
-    college.iconPath = "/uploads/collegeIcons/" + req.file.filename
+  if (!artist) {
+    return res.status(404).send('Artist not found')
   }
 
-  await college.save()
-
-  res.redirect("/admin/colleges")
+  res.render('admin/editArtist', { artist })
 })
 
-// POST - Edit a college
-router.post('/colleges/:id', requireLogin, requireAdmin, upload.single("icon"), async (req,res)=>{
-  const college = await College.findById(req.params.id)
-
-  college.name = req.body.name
-  college.repName = req.body.repName
-  college.repEmail = req.body.repEmail
-  college.repPhone = req.body.repPhone
-  college.website = req.body.website
-  college.notes = req.body.notes
-
-  if (req.file) {
-    college.iconPath = "/uploads/collegeIcons/" + req.file.filename
-  }
-
-  await college.save()
-
-  res.redirect("/admin/colleges")
-})
-
-// Delete a college
-router.post('/colleges/:id/delete', requireLogin, requireAdmin, async (req,res)=>{
-  await College.findByIdAndDelete(req.params.id)
-  res.redirect("/admin/colleges")
+router.post('/artwork/:id/delete', requireLogin, requireAdmin, async (req,res)=>{
+  await Artwork.findByIdAndDelete(req.params.id)
+  res.redirect('/admin/artwork')
 })
 
 export default router

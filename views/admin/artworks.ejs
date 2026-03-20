@@ -1,0 +1,32 @@
+<%- include('../partials/header') %>
+
+<h1>Artworks</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Artist</th>
+      <th>Materials</th>
+      <th>Display</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% artworks.forEach(artwork => { %>
+      <tr>
+        <td><%= artwork.title %></td>
+        <td><%= artwork.creator ? artwork.creator.name : "-" %></td>
+        <td><%= artwork.materials || "-" %></td>
+        <td><%= artwork.display ? "Yes" : "No" %></td>
+        <td>
+          <form method="POST" action="/artwork/<%= artwork._id %>/delete" style="display:inline">
+            <button type="submit">Delete</button>
+          </form>
+        </td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>
+
+<%- include('../partials/footer') %>

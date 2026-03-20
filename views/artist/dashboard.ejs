@@ -1,0 +1,27 @@
+<%- include('../partials/header') %>
+<h1>Artist Dashboard</h1>
+
+<p class="subtitle">
+Click an artwork to add notes and mark your interest.
+</p>
+
+<div class="college-grid">
+  <% artworks.forEach(artwork => { %>
+  <a href="/student/artwork/<%= artwork._id %>">
+    <div class="college-card">
+      <% if (artwork.iconPath) { %>
+      <img src="<%= artwork.iconPath %>" class="college-logo">
+      <% } else { %>
+
+      <div class="placeholder-logo">
+        🎓
+      </div>
+      <% } %>
+
+      <h3><%= artwork.name %></h3>
+    </div>
+  </a>
+  <% }) %>
+</div>
+
+<%- include('../partials/footer') %>
